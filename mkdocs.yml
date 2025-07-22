@@ -1,0 +1,69 @@
+site_name: NLP for Drone Flight Log Analysis
+site_url: https://swardiantara.github.io/DroneNLP/ # IMPORTANT: Update this with your GitHub username and repository name
+site_description: Unlocking Insights from Drone Flight Logs with NLP.
+site_author: Swardiantara Silalahi
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+    - content.code.copy
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: 'indigo'
+      accent: 'indigo'
+      toggle:
+        icon: material/brightness-4
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: 'indigo'
+      accent: 'indigo'
+      toggle:
+        icon: material/brightness-7
+        name: Switch to light mode
+  font:
+    text: Inter
+    code: Roboto Mono
+
+nav:
+  - Home: index.md
+  - About the Project: about.md
+  - Methodology:
+    - Data Collection & Initial Scope: methodology/data-collection.md
+    - Data Cleansing Procedure: methodology/cleansing.md
+    - Annotation Justification & Standards: methodology/annotation-justification.md
+    - General Annotation Procedure: methodology/general-annotation.md
+    - Problem Identification Annotation: methodology/problem-identification-annotation.md
+  - Dataset Challenges:
+    - Introduction to Challenges: dataset/index.md
+    - Challenge 001: DJI Phantom 4 Pro - Flight X - dataset/challenge-001.md
+    - Challenge 002: Autel EVO II - Flight Y - dataset/challenge-002.md
+  - Dataset Download: download.md
+  - Publications: publications.md
+  - Resources: resources.md
+  - Contact: contact.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - attr_list
+  - md_in_html
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.snippets
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - toc:
+      permalink: true
+
+plugins:
+  - search
