@@ -1,5 +1,5 @@
 site_name: NLP for Drone Flight Log Analysis
-site_url: https://swardiantara.github.io/DroneNLP/ # IMPORTANT: Update this with your GitHub username and repository name
+site_url: https://dronenlp.github.io/documentation/
 site_description: Unlocking Insights from Drone Flight Logs with NLP.
 site_author: Swardiantara Silalahi
 
@@ -35,6 +35,7 @@ nav:
   - Home: index.md
   - About the Project: about.md
   - Methodology:
+    - methodology/index.md
     - Data Collection & Initial Scope: methodology/data-collection.md
     - Data Cleansing Procedure: methodology/cleansing.md
     - Annotation Justification & Standards: methodology/annotation-justification.md
@@ -46,7 +47,7 @@ nav:
     - Challenge 002: Autel EVO II - Flight Y - dataset/challenge-002.md
   - Dataset Download: download.md
   - Publications: publications.md
-  - Resources: resources.md
+  - Blog: blog/index.md
   - Contact: contact.md
 
 markdown_extensions:
