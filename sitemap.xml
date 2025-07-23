@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+         <loc>https://dronenlp.github.io/documentation/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/about/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/blog/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/blog/vto-labs-extraction/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/methodology/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/methodology/cleansing/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+    <url>
+         <loc>https://dronenlp.github.io/documentation/methodology/data-collection/</loc>
+         <lastmod>2025-07-23</lastmod>
+    </url>
+</urlset>

@@ -1,0 +1,1489 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Unlocking Insights from Drone Flight Logs with NLP.">
+      
+      
+        <meta name="author" content="Swardiantara Silalahi">
+      
+      
+        <link rel="canonical" href="https://dronenlp.github.io/documentation/methodology/cleansing/">
+      
+      
+        <link rel="prev" href="../data-collection/">
+      
+      
+        <link rel="next" href="../../blog/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Data Cleansing Procedure - NLP for Drone Flight Log Analysis</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#data-cleansing-procedure" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="NLP for Drone Flight Log Analysis" class="md-header__button md-logo" aria-label="NLP for Drone Flight Log Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            NLP for Drone Flight Log Analysis
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Data Cleansing Procedure
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About the Project
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../" class="md-tabs__link">
+          
+  
+  
+  Methodology
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../dataset/index.md" class="md-tabs__link">
+          
+  
+  
+  Dataset Challenges
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../download.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Dataset Download
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../publications.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Publications
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../blog/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Blog
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contact.md" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contact
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="NLP for Drone Flight Log Analysis" class="md-nav__button md-logo" aria-label="NLP for Drone Flight Log Analysis" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    NLP for Drone Flight Log Analysis
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About the Project
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Methodology
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Methodology
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Our Methodology: A Transparent Approach
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../data-collection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Collection & Initial Scope
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Data Cleansing Procedure
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data Cleansing Procedure
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-accessing-raw-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accessing Raw Logs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-motivating-examples-for-cleansing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Motivating Examples for Cleansing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Motivating Examples for Cleansing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-missing-punctuation-concatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1: Missing Punctuation &amp; Concatenation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-ambiguous-or-over-generalized-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2: Ambiguous or Over-generalized Statements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-correction-types-and-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Correction Types and Procedures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Correction Types and Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-type-1-missing-punctuation-and-space-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Type 1: Missing Punctuation and Space Correction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-type-2-over-generalized-message-analysis-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Type 2: Over-generalized Message Analysis &amp; Refinement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Type 2: Over-generalized Message Analysis &amp; Refinement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-1-message-id-34" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case 1: Message ID 34
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-2-message-id-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case 2: Message ID 204
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-other-cleansing-considerations-briefly-mention" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Other Cleansing Considerations (Briefly Mention)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-documentation-of-all-corrected-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Documentation of All Corrected Messages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../annotation-justification.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotation Justification & Standards
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../general-annotation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    General Annotation Procedure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../problem-identification-annotation.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Problem Identification Annotation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Dataset Challenges
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Dataset Challenges
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../dataset/index.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to Challenges
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../DJI Phantom 4 Pro - Flight X - dataset/challenge-001.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Challenge 001
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Autel EVO II - Flight Y - dataset/challenge-002.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Challenge 002
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../download.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dataset Download
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../publications.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Publications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Blog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contact.md" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contact
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-accessing-raw-logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. Accessing Raw Logs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-motivating-examples-for-cleansing" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Motivating Examples for Cleansing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Motivating Examples for Cleansing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-1-missing-punctuation-concatenation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 1: Missing Punctuation &amp; Concatenation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-2-ambiguous-or-over-generalized-statements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example 2: Ambiguous or Over-generalized Statements
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-correction-types-and-procedures" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Correction Types and Procedures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Correction Types and Procedures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#31-type-1-missing-punctuation-and-space-correction" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.1. Type 1: Missing Punctuation and Space Correction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#32-type-2-over-generalized-message-analysis-refinement" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.2. Type 2: Over-generalized Message Analysis &amp; Refinement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3.2. Type 2: Over-generalized Message Analysis &amp; Refinement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#case-1-message-id-34" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case 1: Message ID 34
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#case-2-message-id-204" class="md-nav__link">
+    <span class="md-ellipsis">
+      Case 2: Message ID 204
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#33-other-cleansing-considerations-briefly-mention" class="md-nav__link">
+    <span class="md-ellipsis">
+      3.3. Other Cleansing Considerations (Briefly Mention)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-documentation-of-all-corrected-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Documentation of All Corrected Messages
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="data-cleansing-procedure">Data Cleansing Procedure<a class="headerlink" href="#data-cleansing-procedure" title="Permanent link">&para;</a></h1>
+<p>The raw flight log messages obtained from sources like AirData UAV, while rich in information, often contain various forms of noise that can significantly hinder subsequent Natural Language Processing (NLP) tasks. These noisy logs can manifest as inconsistent formatting, missing punctuation, over-generalized statements, or irrelevant system messages, making automated extraction and understanding challenging.</p>
+<p>Our data cleansing procedure is a critical initial step designed to transform these raw, noisy messages into a structured, consistent, and semantically clearer format, suitable for robust NLP analysis. This process ensures the quality and reliability of our annotated dataset.</p>
+<hr />
+<h2 id="1-accessing-raw-logs">1. Accessing Raw Logs<a class="headerlink" href="#1-accessing-raw-logs" title="Permanent link">&para;</a></h2>
+<p>The raw, un-cleansed flight logs from which our dataset is derived are available as part of the complete dataset download on Zenodo. This allows for full transparency and reproducibility of our cleansing process.</p>
+<ul>
+<li><strong>Access Raw Logs on Zenodo:</strong> [Link to your Zenodo dataset DOI]<ul>
+<li><em>Note: These raw logs, while representing the original source, might have undergone minimal initial parsing by the AirData platform itself. Our cleansing focuses on refining the textual content.</em></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="2-motivating-examples-for-cleansing">2. Motivating Examples for Cleansing<a class="headerlink" href="#2-motivating-examples-for-cleansing" title="Permanent link">&para;</a></h2>
+<p>To illustrate the necessity of data cleansing, consider the following examples of raw messages and their challenges for NLP:</p>
+<h3 id="example-1-missing-punctuation-concatenation">Example 1: Missing Punctuation &amp; Concatenation<a class="headerlink" href="#example-1-missing-punctuation-concatenation" title="Permanent link">&para;</a></h3>
+<div class="grid cards">
+<ul>
+<li>
+<p><strong>Original Message</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>165 - Ambient Light too Weak, Vision Positioningobstacle sensing is unavailable. please ensure safety during the flight
+</code></pre></div></p>
+<ul>
+<li><strong>Challenge for NLP:</strong> The concatenation of "Positioning" and "obstacle" (e.g., "Positioningobstacle") makes tokenization difficult and impedes entity recognition or parsing of sensor-related information. The missing period after "unavailable" and capitalization issues further complicate sentence boundary detection and readability.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cleansed Message</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>165 - Ambient Light too Weak. Vision Positioning/Obstacle Sensing is unavailable. Please ensure safety during the flight.
+</code></pre></div></p>
+<ul>
+<li><strong>Impact:</strong> This corrected version allows for accurate tokenization, clearer identification of the system affected ("Vision Positioning/Obstacle Sensing"), and proper sentence segmentation, which is crucial for many NLP tasks.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h3 id="example-2-ambiguous-or-over-generalized-statements">Example 2: Ambiguous or Over-generalized Statements<a class="headerlink" href="#example-2-ambiguous-or-over-generalized-statements" title="Permanent link">&para;</a></h3>
+<div class="grid cards">
+<ul>
+<li>
+<p><strong>Original Message</strong>
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>34 - Detected side/backward/forward shock / possible collision, aircraft is pitching/rolling sharply forward/backwards/left/right
+</code></pre></div></p>
+<ul>
+<li><strong>Challenge for NLP:</strong> This message is highly generalized. "Possible collision" is vague, and "pitching/rolling sharply" combines multiple distinct flight maneuvers or anomalous behaviors. Without disambiguation, it's difficult for an NLP model to infer the precise event or its cause, limiting its utility for incident analysis or specific problem identification.</li>
+</ul>
+</li>
+<li>
+<p><strong>Analysis Goal (for cleansed data)</strong></p>
+<ul>
+<li>For such messages, our cleansing aims to either refine them based on available context (if a definitive, specific interpretation is possible) or to flag them as multi-faceted warnings that require deeper human review and contextual analysis, which our subsequent annotation tasks address. This ensures that the dataset either provides precise ground truth or highlights areas of inherent ambiguity.</li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="3-correction-types-and-procedures">3. Correction Types and Procedures<a class="headerlink" href="#3-correction-types-and-procedures" title="Permanent link">&para;</a></h2>
+<p>Our cleansing process primarily addresses two major categories of noise:</p>
+<h3 id="31-type-1-missing-punctuation-and-space-correction">3.1. Type 1: Missing Punctuation and Space Correction<a class="headerlink" href="#31-type-1-missing-punctuation-and-space-correction" title="Permanent link">&para;</a></h3>
+<p>These corrections focus on improving the syntactic structure and readability of messages by addressing errors commonly arising from inconsistent logging practices or data ingestion.</p>
+<ul>
+<li><strong>Motivation:</strong> Incorrect punctuation and missing spaces create malformed tokens, break sentence boundaries, and impede standard NLP preprocessing steps (e.g., tokenization, part-of-speech tagging, dependency parsing). Correcting these issues ensures messages are parseable and conform to expected linguistic patterns.</li>
+<li>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li><strong>Automated Rules:</strong> Regular expressions and rule-based heuristics were applied to identify common patterns of missing spaces (e.g., lowercase followed by uppercase, number followed by alphabet) or missing punctuation (e.g., sentence ending without a period).</li>
+<li><strong>Contextual Insertion:</strong> Punctuation (e.g., periods, commas, slashes) was inserted based on common linguistic rules and observed patterns in well-formed messages, particularly at logical phrase or clause boundaries.</li>
+<li><strong>Manual Review &amp; Refinement:</strong> A significant portion of these corrections involved manual review by human annotators to ensure semantic correctness and avoid introducing new errors. This iterative process involved developing new rules based on observed edge cases.</li>
+</ol>
+</li>
+<li>
+<p><strong>Examples of Type 1 Corrections:</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Message ID</th>
+<th style="text-align: left;">Original Message (Excerpt)</th>
+<th style="text-align: left;">Corrected Message (Excerpt)</th>
+<th style="text-align: left;">Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">165</td>
+<td style="text-align: left;"><code>Ambient Light too Weak, Vision Positioningobstacle sensing is unavailable.</code></td>
+<td style="text-align: left;"><code>Ambient Light too Weak. Vision Positioning/Obstacle Sensing is unavailable.</code></td>
+<td style="text-align: left;">Inserted period after "Weak" to separate independent clauses. Added "/" to clarify "Vision Positioning/Obstacle Sensing". Fixed "Positioningobstacle" concatenation.</td>
+</tr>
+<tr>
+<td style="text-align: left;">204</td>
+<td style="text-align: left;"><code>Ambient Light too Weak, Forward/Backwardobstacle sensing is unavailable.</code></td>
+<td style="text-align: left;"><code>Ambient Light too Weak. Forward/Backward Obstacle Sensing is unavailable.</code></td>
+<td style="text-align: left;">Similar to 165, separated clauses with a period. Added space between "Backward" and "Obstacle".</td>
+</tr>
+<tr>
+<td style="text-align: left;">78</td>
+<td style="text-align: left;"><code>Battery voltage lowplease land</code></td>
+<td style="text-align: left;"><code>Battery voltage low. Please land.</code></td>
+<td style="text-align: left;">Separated two distinct imperative clauses with a period. Capitalized "Please" for sentence start.</td>
+</tr>
+<tr>
+<td style="text-align: left;">112</td>
+<td style="text-align: left;"><code>GPS signal weakcannot find home point.</code></td>
+<td style="text-align: left;"><code>GPS signal weak. Cannot find home point.</code></td>
+<td style="text-align: left;">Separated two distinct clauses with a period. Capitalized "Cannot".</td>
+</tr>
+<tr>
+<td style="text-align: left;">312</td>
+<td style="text-align: left;"><code>Aircraft disconnectedfrom remote controller.</code></td>
+<td style="text-align: left;"><code>Aircraft disconnected from remote controller.</code></td>
+<td style="text-align: left;">Inserted missing space between "disconnected" and "from".</td>
+</tr>
+<tr>
+<td style="text-align: left;">405</td>
+<td style="text-align: left;"><code>Propeller errorcheck propellers</code></td>
+<td style="text-align: left;"><code>Propeller error. Check propellers.</code></td>
+<td style="text-align: left;">Separated statement from instruction with a period. Capitalized "Check".</td>
+</tr>
+<tr>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;"><em>[More examples will be added here or linked to]</em></td>
+<td style="text-align: left;"><em>[More examples]</em></td>
+<td style="text-align: left;"><em>[More justifications]</em></td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="32-type-2-over-generalized-message-analysis-refinement">3.2. Type 2: Over-generalized Message Analysis &amp; Refinement<a class="headerlink" href="#32-type-2-over-generalized-message-analysis-refinement" title="Permanent link">&para;</a></h3>
+<p>This category deals with messages that, while syntactically correct, are semantically vague, combine multiple potential issues, or lack the specificity required for granular NLP analysis (e.g., pinpointing a single root cause).</p>
+<ul>
+<li><strong>Motivation:</strong> Over-generalized messages reduce the actionable insights derivable from flight logs. For tasks like problem identification or event recognition, it's crucial to either refine these messages into more specific statements or to acknowledge their inherent ambiguity and document potential interpretations. This process aims to enhance the utility of the dataset for models seeking precise classifications.</li>
+<li>
+<p><strong>Procedure:</strong></p>
+<ol>
+<li><strong>Expert Review &amp; Contextual Analysis:</strong> Messages identified as over-generalized underwent rigorous review by domain experts. This involved consulting official drone documentation, flight manuals, and aviation safety reports (FAA, NTSB, INTERPOL) to understand the full spectrum of conditions that might trigger such messages.</li>
+<li><strong>Disambiguation Strategies:</strong><ul>
+<li><strong>Contextual Refinement:</strong> When surrounding log messages, telemetry data (not part of this NLP dataset), or known flight conditions provided sufficient evidence, the message was rephrased to reflect a more specific event or issue.</li>
+<li><strong>Documentation of Possibilities:</strong> For cases where a definitive single interpretation was not possible without external data, the message was documented with a detailed explanation of its potential meanings or the various scenarios it might cover. This helps annotators and future model developers understand the inherent ambiguity.</li>
+<li><strong>Decomposition (Future Work):</strong> In some complex cases, an over-generalized message might be decomposed into multiple, distinct events or issues. This is a more advanced form of refinement and is considered for future iterations of the dataset.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><strong>Case Studies: Discussion of Over-Generalized Messages</strong></p>
+<p>Here, we delve into specific examples of over-generalized messages, discussing their challenges and our approach to handling them in the dataset.</p>
+<h4 id="case-1-message-id-34"><strong>Case 1: Message ID 34</strong><a class="headerlink" href="#case-1-message-id-34" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Original Message:</strong> <code>Detected side/backward/forward shock / possible collision, aircraft is pitching/rolling sharply forward/backwards/left/right</code></p>
+</li>
+<li>
+<p><strong>Analysis &amp; Approach:</strong>
+    This message is a prime example of an alert designed to cover a broad range of potential impact or stability issues. The use of multiple slash-separated terms (<code>side/backward/forward shock</code>, <code>pitching/rolling sharply forward/backwards/left/right</code>) indicates a generic warning that could be triggered by various events, from a minor bump to a significant collision, or even extreme turbulence.</p>
+<ul>
+<li><strong>Possibilities of Actual Events:</strong><ul>
+<li><strong>Minor Collision/Contact:</strong> The drone might have briefly contacted a tree branch, power line, or other obstacle without severe damage.</li>
+<li><strong>Hard Landing/Rough Touchdown:</strong> A less-than-smooth landing could trigger "shock" or "pitching/rolling sharply."</li>
+<li><strong>Extreme Turbulence/Wind Shear:</strong> Strong, sudden gusts of wind could cause the aircraft to "pitch/roll sharply" or experience a "shock" without any physical contact.</li>
+<li><strong>Gimbal/Camera Impact:</strong> If the camera or gimbal hit something, it might be interpreted as a "shock" to the aircraft.</li>
+<li><strong>Internal Component Shift/Malfunction:</strong> Less likely, but a sudden shift of an internal battery or a mechanical failure could produce similar readings.</li>
+</ul>
+</li>
+<li><strong>Dataset Handling:</strong> For annotation purposes, such messages are typically tagged as a <code>Warning</code> type with <code>Collision/Impact Risk</code> as a broad problem category. However, in cases where context from surrounding messages or flight telemetry <em>definitively</em> indicated a specific type of collision (e.g., immediate follow-up messages about sensor damage), a more specific annotation might be applied. Where specific disambiguation is not possible, the annotation reflects the generalized nature of the warning.</li>
+</ul>
+</li>
+</ul>
+<h4 id="case-2-message-id-204"><strong>Case 2: Message ID 204</strong><a class="headerlink" href="#case-2-message-id-204" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><strong>Original Message (after Type 1 cleansing):</strong> <code>Ambient Light too Weak. Forward/Backward Obstacle Sensing is unavailable. Please ensure safety during the flight.</code></p>
+</li>
+<li>
+<p><strong>Analysis &amp; Approach:</strong>
+    While the punctuation is corrected, the core issue of "Forward/Backward Obstacle Sensing is unavailable" remains somewhat generalized. It implies a functional failure, but the underlying <em>reason</em> for unavailability might vary beyond just "Ambient Light too Weak."</p>
+<ul>
+<li><strong>Possibilities of Actual Causes for Sensing Unavailability (beyond just light):</strong><ul>
+<li><strong>Sensor Obstruction:</strong> The obstacle sensing cameras/sensors could be physically blocked (e.g., by dirt, moisture, sticker).</li>
+<li><strong>Software Glitch/Bug:</strong> A temporary software issue might render the sensors inoperative.</li>
+<li><strong>Hardware Malfunction:</strong> A sensor component itself could have failed.</li>
+<li><strong>Environmental Factors:</strong> While "Ambient Light too Weak" is given, other environmental factors like heavy fog, smoke, or excessive glare could also contribute.</li>
+<li><strong>Flight Mode Limitation:</strong> Certain flight modes (e.g., Sport mode on some DJI drones) intentionally disable obstacle sensing.</li>
+</ul>
+</li>
+<li><strong>Dataset Handling:</strong> In our annotated dataset, the primary problem identified is <code>Sensor Unavailability</code> or <code>Environmental Limitation</code> (due to ambient light). While the message itself is generalized, the immediate preceding or following messages often provide more context (e.g., specific sensor error codes) that allow for a more precise <code>Problem Identification</code> annotation. If no further context is available, the annotation reflects the directly stated warning.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="33-other-cleansing-considerations-briefly-mention">3.3. Other Cleansing Considerations (Briefly Mention)<a class="headerlink" href="#33-other-cleansing-considerations-briefly-mention" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Removal of Redundant/Repetitive Messages:</strong> Consecutive identical messages often provide no new information and are consolidated or removed to streamline the dataset.</li>
+<li><strong>Anonymization:</strong> Any potentially personally identifiable information or highly sensitive flight details are carefully anonymized or removed to ensure privacy.</li>
+<li><strong>Normalization:</strong> Consistent formatting of numerical values (e.g., temperatures, voltages) and units of measurement.</li>
+</ul>
+<hr />
+<h2 id="4-documentation-of-all-corrected-messages">4. Documentation of All Corrected Messages<a class="headerlink" href="#4-documentation-of-all-corrected-messages" title="Permanent link">&para;</a></h2>
+<p>A comprehensive log of all messages that underwent cleansing, showing their original and corrected forms, along with the specific type of correction applied and a brief justification, is provided for full transparency.</p>
+<ul>
+<li>
+<p><strong>Download the Full Cleansing Log:</strong>
+    This detailed log is available as a CSV or JSON file on our Zenodo dataset. It serves as an exhaustive record of all modifications.</p>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Example CLI command to download the cleansing log (replace DOI)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>zenodo_get<span class="w"> </span>--file<span class="w"> </span><span class="s2">&quot;cleansing_log_v1.0.csv&quot;</span><span class="w"> </span><span class="o">[</span>YOUR_ZENODO_DOI_NUMBER_HERE<span class="o">]</span>
+</code></pre></div>
+* <strong>File Format:</strong> The log is typically in <code>CSV</code> or <code>JSONL</code> format, with columns such as <code>MessageID</code>, <code>OriginalMessage</code>, <code>CorrectedMessage</code>, <code>CorrectionType</code>, <code>Justification</code>, etc.</p>
+</li>
+<li>
+<p><strong>Sample from the Cleansing Log:</strong>
+    Here's a small illustrative sample of what you'll find in the full cleansing log:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Message ID</th>
+<th style="text-align: left;">Original Message</th>
+<th style="text-align: left;">Corrected Message</th>
+<th style="text-align: left;">Correction Type</th>
+<th style="text-align: left;">Justification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">165</td>
+<td style="text-align: left;"><code>Ambient Light too Weak, Vision Positioningobstacle sensing is unavailable. please ensure safety during the flight</code></td>
+<td style="text-align: left;"><code>Ambient Light too Weak. Vision Positioning/Obstacle Sensing is unavailable. Please ensure safety during the flight.</code></td>
+<td style="text-align: left;">Type 1</td>
+<td style="text-align: left;">Punctuation, capitalization, space, slash added.</td>
+</tr>
+<tr>
+<td style="text-align: left;">204</td>
+<td style="text-align: left;"><code>Ambient Light too Weak, Forward/Backwardobstacle sensing is unavailable. please ensure safety during the flight</code></td>
+<td style="text-align: left;"><code>Ambient Light too Weak. Forward/Backward Obstacle Sensing is unavailable. Please ensure safety during the flight.</code></td>
+<td style="text-align: left;">Type 1</td>
+<td style="text-align: left;">Punctuation, capitalization, space added.</td>
+</tr>
+<tr>
+<td style="text-align: left;">34</td>
+<td style="text-align: left;"><code>Detected side/backward/forward shock / possible collision, aircraft is pitching/rolling sharply forward/backwards/left/right</code></td>
+<td style="text-align: left;"><em>(No direct "corrected" form for this type of over-generalized message; analysis provided in section 3.2)</em></td>
+<td style="text-align: left;">Type 2 (Analysis)</td>
+<td style="text-align: left;">Documented ambiguity and potential interpretations.</td>
+</tr>
+<tr>
+<td style="text-align: left;">78</td>
+<td style="text-align: left;"><code>Battery voltage lowplease land</code></td>
+<td style="text-align: left;"><code>Battery voltage low. Please land.</code></td>
+<td style="text-align: left;">Type 1</td>
+<td style="text-align: left;">Punctuation, capitalization.</td>
+</tr>
+<tr>
+<td style="text-align: left;">121</td>
+<td style="text-align: left;"><code>NoGPS signalweak.</code></td>
+<td style="text-align: left;"><code>No GPS signal. Weak.</code></td>
+<td style="text-align: left;">Type 1</td>
+<td style="text-align: left;">Space, punctuation, capitalization.</td>
+</tr>
+<tr>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+<td style="text-align: left;">...</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<hr />
+<p>This structure for your <code>cleansing.md</code> file will make your data cleansing process incredibly transparent and easy for other researchers to understand and replicate. Remember to replace all placeholder text (<code>[YOUR_ZENODO_DOI_HERE]</code>, etc.) with your actual project details once they are available.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.sections", "search.suggest", "search.highlight", "content.tabs.link", "content.code.copy"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
